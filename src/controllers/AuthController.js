@@ -40,6 +40,7 @@ class AuthController {
         name: user.name,
         email: user.email,
         role: user.role,
+        avatar: user.avatar,
 		api_url_bot1: user.api_url_bot1,
 		api_username_bot1: user.api_username_bot1,
 		api_password_bot1: user.api_password_bot1,

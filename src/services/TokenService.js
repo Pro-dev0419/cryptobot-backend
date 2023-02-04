@@ -15,7 +15,8 @@ const sign = async (playload, secretToken, options) => {
 const createAccessToken = async user => {
   try {
     const payload = {
-      id: user._id
+      id: user._id,
+      email: user.email
     };
 
     const options = {

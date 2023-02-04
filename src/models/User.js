@@ -27,6 +27,10 @@ const UserSchema = new Schema(
 		unique: true,
 		trim: true,
 	  },
+	  avatar: {
+		type: String,
+        default: 'default.jpg'
+	  },
 	  accountType: {
 		type: Number,
 		// required: true, type1: User type2:Company
