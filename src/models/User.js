@@ -39,7 +39,22 @@ const UserSchema = new Schema(
 	  api_key_binance: {
 		  type: String,
 	  },
+	  api_secret_binance: {
+		  type: String,
+	  },
 	  api_keys_kraken: {
+		  type: String,
+	  },
+	  api_secret_kraken: {
+		  type: String,
+	  },
+	  api_keys_kucoin: {
+		  type: String,
+	  },
+	  api_secret_kucoin: {
+		  type: String,
+	  },
+	  api_password_kucoin: {
 		  type: String,
 	  },
 	  api_keys_bittrex: {
@@ -87,7 +102,10 @@ const UserSchema = new Schema(
 	}
   );
 
-mongoose.set("useCreateIndex", true);
+  mongoose.set('useNewUrlParser', true);
+  mongoose.set('useFindAndModify', false);
+  mongoose.set('useCreateIndex', true);
+  mongoose.set('useUnifiedTopology', true);
 UserSchema.plugin(uniqueValidator);
 
 export default mongoose.model("User", UserSchema);

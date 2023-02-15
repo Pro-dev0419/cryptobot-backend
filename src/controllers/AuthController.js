@@ -11,7 +11,7 @@ import config from "../config/app";
 class AuthController {
   @TryCatchErrorDecorator
   static async signin(req, res) {
-    const user = await UserModel.findOne({ email: req.body.email });
+    let user = await UserModel.findOne({ email: req.body.email });
     if (!user) {
       throw new ClientError("User not found", 404);
     }
@@ -32,6 +32,13 @@ class AuthController {
       refreshTokenHash
     );
 
+    
+      user.botName = "Athenea1";
+      user.api_url_bot1 = 'http://213.194.169.88:8080';
+      user.api_username_bot1 = "freq";
+      user.api_password_bot1 = "freq";
+    
+
     res.json({
       accessToken,
       refreshToken,
@@ -41,9 +48,9 @@ class AuthController {
         email: user.email,
         role: user.role,
         avatar: user.avatar,
-		api_url_bot1: user.api_url_bot1,
-		api_username_bot1: user.api_username_bot1,
-		api_password_bot1: user.api_password_bot1,
+        api_url_bot1: user.api_url_bot1,
+        api_username_bot1: user.api_username_bot1,
+        api_password_bot1: user.api_password_bot1,
       },
     });
   }
