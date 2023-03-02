@@ -33,4 +33,9 @@ router.post(
   AuthController.confirmRestorePassword
 );
 
+router.post(
+    "/kyc-verification",
+    AuthController.kycVerification
+);
+
 export default router;

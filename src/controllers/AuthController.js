@@ -1,4 +1,5 @@
 import UserModel from "../models/User";
+import KycVerificationModel from "../models/KycVerification";
 import PasswordService from "../services/PasswordService";
 import ClientError from "../exeptions/ClientError";
 import TryCatchErrorDecorator from "../decorators/TryCatchErrorDecorator";
@@ -220,6 +221,31 @@ class AuthController {
 
     console.log("Admin user successfully created ");
     return;
+  }
+
+  @TryCatchErrorDecorator
+  static async kycVerification(req, res) {
+    const isAlreadyUser = await KycVerificationModel.findOne({ user_id : req.body.verificationInfo.user_id });
+    if (isAlreadyUser) {
+      throw new ClientError("This user already has verification infomation", 409);
+    }
+
+
+    const kyc = new KycVerificationModel({
+      user_id: req.body.verificationInfo.user_id,
+      firstname: req.body.verificationInfo.firstName,
+      lastname: req.body.verificationInfo.lastName,
+      country: req.body.verificationInfo.country,
+      gender: req.body.verificationInfo.gender,
+      address: req.body.verificationInfo.address,
+      state: req.body.verificationInfo.state,
+      zipcode: req.body.verificationInfo.zipcode,
+      city: req.body.verificationInfo.city,
+      identify_img: req.body.verificationInfo.identifyImg
+    });
+
+    await kyc.save();
+    res.json({ status: "Successfully submited your information" });
   }
 }
 
